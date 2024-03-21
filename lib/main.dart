@@ -1,10 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(BenimUygulamam());
 }
 
-// 12.39 da kaldım 24. videos
 class BenimUygulamam extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,8 +26,24 @@ class BenimUygulamam extends StatelessWidget {
   }
 }
 
-class YemekSayfasi extends StatelessWidget {
+class YemekSayfasi extends StatefulWidget {
+  @override
+  State<YemekSayfasi> createState() => _YemekSayfasiState();
+}
+
+class _YemekSayfasiState extends State<YemekSayfasi> {
   int corbaNo = 1;
+  int yemekNo = 1;
+  int tatliNo = 1;
+
+  @override
+  void setStateMenu() {
+    setState(() {
+      yemekNo = Random().nextInt(5) + 1;
+      tatliNo = Random().nextInt(5) + 1;
+      corbaNo = Random().nextInt(5) + 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +60,7 @@ class YemekSayfasi extends StatelessWidget {
                   // color: Colors.yellow,
                   // higlightColor: Colors.blue,
                   // splashColor: Colors.black,
-                  onPressed: () {
-                    print('corbaaaaaaaaaaaaa');
-                    corbaNo = 4;
-                    print(corbaNo);
-                  },
+                  onPressed: setStateMenu,
                   child: Image.asset('assets/corba_$corbaNo.jpg')),
             ),
           ),
@@ -56,10 +69,8 @@ class YemekSayfasi extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
                 style: TextButton.styleFrom(backgroundColor: Colors.yellow),
-                onPressed: () {
-                  print('yemekkkkkkkkkkkkk');
-                },
-                child: Image.asset('assets/yemek_1.jpg'),
+                onPressed: setStateMenu,
+                child: Image.asset('assets/yemek_$yemekNo.jpg'),
               ),
             ),
           ),
@@ -68,10 +79,8 @@ class YemekSayfasi extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
                 style: TextButton.styleFrom(backgroundColor: Colors.yellow),
-                onPressed: () {
-                  print('tatlıııııııııı');
-                },
-                child: Image.asset('assets/tatli_1.jpg'),
+                onPressed: setStateMenu,
+                child: Image.asset('assets/tatli_$tatliNo.jpg'),
               ),
             ),
           ),
